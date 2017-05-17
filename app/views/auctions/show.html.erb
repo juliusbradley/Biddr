@@ -1,0 +1,27 @@
+<h1><%= @auction.title %></h1>
+
+<p><%= @auction.details %></p>
+<br><br>
+
+<p>End Date: <%= @auction.end_date %></p>
+<% if @auction.current_price  >= @auction.reserve_price %>
+<p> Reserve met </p>
+<% @auction.reserve_price == @auction.current_price %>
+<% else %>
+<p>Reserve not met</p>
+<p>Reserve Price: <%= @auction.reserve_price %></p>
+<% end %>
+
+<p id="current_price">Current Price: <%= @auction.current_price %></p>
+
+<div class="col-sm-6">
+<h2>Bids:</h2>
+  <%= render "bids/all_bids" %>
+</div>
+
+<% if current_user != @auction.user %>
+<h2>Create Bid: </h2>
+  <%= render "bids/form" %>
+  <% else %>
+  <p>Cannot bid on your own auction</p>
+  <% end %>
